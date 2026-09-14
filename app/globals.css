@@ -1,26 +1,386 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #f1ece3;
+  --cream: #faf6ef;
+  --ink: #161513;
+  --muted: #6d6861;
+  --rule: #cfc8bb;
+  --mark: #c01515;
+  --wash: #e7e1d6;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-mark: var(--mark);
+  --color-wash: var(--wash);
+  --font-sans: var(--font-vt);
+  --font-display: var(--font-pixelify);
+  --font-pixel: var(--font-press);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-monospace, monospace;
+  font-size: 20px;
+  line-height: 1.35;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  letter-spacing: 0;
+}
+
+.font-pixel {
+  font-family: var(--font-pixel), var(--font-display), monospace;
+  line-height: 1.5;
+}
+
+::selection {
+  background: var(--mark);
+  color: var(--cream);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 4px solid var(--ink);
+  font-family: var(--font-display), sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  box-shadow: 4px 4px 0 var(--mark);
+}
+
+.btn-solid {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 4px 4px 0 var(--mark);
+}
+
+.btn-solid:hover {
+  background: var(--mark);
+  color: #fff;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.btn-line {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.btn-line:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  box-shadow: none;
+}
+
+.choice {
+  border: 4px solid var(--rule);
+  background: var(--cream);
+  text-align: left;
+}
+
+.choice:hover {
+  border-color: var(--ink);
+}
+
+.choice-on {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  box-shadow: 4px 4px 0 var(--mark);
+}
+
+.pixel-bar {
+  height: 8px;
+  background: var(--rule);
+  box-shadow: inset 0 0 0 2px var(--paper);
+}
+
+.pixel-bar > span,
+.pixel-bar > div {
+  height: 100%;
+  background: var(--mark);
+}
+
+.pixel-frame {
+  border: 4px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--mark);
+  overflow: hidden;
+  background: var(--wash);
+}
+
+.pixel-img {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.35s steps(4) both;
+}
+
+.pixel-stage {
+  width: 100%;
+  user-select: none;
+}
+
+.pixel-cat-scene {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  image-rendering: pixelated;
+}
+
+.tv-glow {
+  animation: cat-glow 1.6s steps(2, end) infinite;
+}
+
+.tv-show {
+  animation-duration: 1.2s;
+  animation-timing-function: steps(1, end);
+  animation-iteration-count: infinite;
+}
+
+.tv-show-1 {
+  animation-name: tv-show-1;
+}
+
+.tv-show-2 {
+  animation-name: tv-show-2;
+}
+
+.tv-show-3 {
+  animation-name: tv-show-3;
+}
+
+.cat-tail {
+  animation-duration: 0.9s;
+  animation-timing-function: steps(1, end);
+  animation-iteration-count: infinite;
+}
+
+.cat-tail-1 {
+  animation-name: cat-tail-1;
+}
+
+.cat-tail-2 {
+  animation-name: cat-tail-2;
+}
+
+.cat-tail-3 {
+  animation-name: cat-tail-3;
+}
+
+.cat-eyes-open {
+  animation: cat-eyes-open 3.2s steps(1, end) infinite;
+}
+
+.cat-eyes-shut {
+  animation: cat-eyes-shut 3.2s steps(1, end) infinite;
+}
+
+.cat-actor {
+  transform-box: fill-box;
+  transform-origin: right bottom;
+  animation: cat-watch 4s steps(2, end) infinite;
+}
+
+.press-start {
+  font-family: var(--font-pixel), monospace;
+  font-size: 10px;
+  color: var(--mark);
+  animation: pixel-blink 1s steps(2, end) infinite;
+}
+
+@keyframes cat-glow {
+  0%,
+  49% {
+    opacity: 0.35;
+  }
+  50%,
+  100% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes tv-show-1 {
+  0%,
+  32% {
+    opacity: 1;
+  }
+  33%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes tv-show-2 {
+  0%,
+  32% {
+    opacity: 0;
+  }
+  33%,
+  65% {
+    opacity: 1;
+  }
+  66%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes tv-show-3 {
+  0%,
+  65% {
+    opacity: 0;
+  }
+  66%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes cat-tail-1 {
+  0%,
+  32% {
+    opacity: 1;
+  }
+  33%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cat-tail-2 {
+  0%,
+  32% {
+    opacity: 0;
+  }
+  33%,
+  65% {
+    opacity: 1;
+  }
+  66%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cat-tail-3 {
+  0%,
+  65% {
+    opacity: 0;
+  }
+  66%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes cat-eyes-open {
+  0%,
+  88% {
+    opacity: 1;
+  }
+  89%,
+  94% {
+    opacity: 0;
+  }
+  95%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes cat-eyes-shut {
+  0%,
+  88% {
+    opacity: 0;
+  }
+  89%,
+  94% {
+    opacity: 1;
+  }
+  95%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cat-watch {
+  0%,
+  72% {
+    transform: translate(0, 0);
+  }
+  73%,
+  90% {
+    transform: translate(2px, 1px);
+  }
+  91%,
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes pixel-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tv-glow,
+  .tv-show,
+  .cat-tail,
+  .cat-eyes-open,
+  .cat-eyes-shut,
+  .cat-actor,
+  .press-start,
+  .fade-up {
+    animation: none;
+  }
+
+  .tv-show-2,
+  .tv-show-3,
+  .cat-tail-2,
+  .cat-tail-3,
+  .cat-eyes-shut {
+    opacity: 0;
+  }
 }
